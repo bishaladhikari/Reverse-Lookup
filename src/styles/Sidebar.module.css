@@ -1,0 +1,44 @@
+/* sidebar.module.css */
+.sidebar {
+    background-color: var(--bg-color); /* Use the same var(--bg-color) from :root */
+    color: var(--text-color); /* Use the same var(--text-color) from :root */
+    width: 250px; /* Adjust the width as needed */
+    height: 100vh; /* Full viewport height */
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menuItem {
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+  }
+  
+  .menuItem:hover {
+    background-color: var(--accent-color); /* Lighter shade for hover */
+    color: #ffffff;
+  }
+  
+  .menuItem a {
+    color: inherit; /* Make sure the links have the same color as the menuItem */
+    text-decoration: none; /* No underlines on links */
+    display: block; /* Make the whole area clickable */
+  }
+  
+  .bottomMenu {
+    /* Optional: if you want to push some items to the bottom of the sidebar */
+    margin-top: auto; /* This will push the menu to the bottom */
+  }
+  
+  /* You may want to add more styling for active states, icons, etc. */
+  

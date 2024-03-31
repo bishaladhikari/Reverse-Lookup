@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+
+
+.theme-toggle {
+  .theme-toggle {
+    background-color: blue-500;
+    color: white;
+    padding: 4px;
+    border-radius: 4px;
+  }
+
+  .input-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .input-label {
+    font-size: small;
+    color: gray-500;
+  }
+
+  .drag-area {
+    border-width: 2px;
+    border-style: dashed;
+    border-color: gray-300;
+    border-radius: 4px;
+    padding: 4px;
+  }
+
+  .drag-icon {
+    text-align: center;
+    color: gray-500;
+  }
+
+  .upload-button {
+    background-color: green-500;
+    color: white;
+    padding: 4px;
+    border-radius: 4px;
+    margin-top: 4px;
+  }
+
+  .view-toggle {
+    background-color: blue-500;
+    color: white;
+    padding: 4px;
+    border-radius: 4px;
+    margin-top: 4px;
+  }
+}
+
+.progress {
+  width: 100%;
+  background-color: gray-200;
+  border-radius: 0.25rem;
+  margin-top: 1rem;
+}
+
+.progress-bar {
+  .h-2 {
+    height: 2px;
+    background-color: blue-500;
+  }
+
+  .grid-view {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 4px;
+  }
+
+  .list-view {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .clear {
+    clear: both;
+  }
+}
