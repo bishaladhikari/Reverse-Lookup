@@ -1,5 +1,13 @@
 import React, { useState, useRef } from "react";
-import axios, { AxiosProgressEvent, AxiosResponse } from "axios";
+import axios from "axios";
+
+declare global {
+    namespace JSX {
+        interface IntrinsicElements {
+            [elemName: string]: any;
+        }
+    }
+}
 
 const App = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -35,12 +43,12 @@ const App = () => {
 
         axios
             .post("/api/process", formData, {
-                onUploadProgress: (progressEvent: AxiosProgressEvent) => {
+                onUploadProgress: (progressEvent) => {
                     const percentCompleted = Math.round((progressEvent.loaded * 100) / (progressEvent.total ?? 0));
                     setProgress(percentCompleted);
                 },
             })
-            .then((response: AxiosResponse) => response.data)
+            .then((response) => response.data)
             .then((data) => {
                 setResults(data.data);
                 setProgress(0);
@@ -130,7 +138,7 @@ const App = () => {
                             results.map((item: any) => (
                                 <tr key={item.id}>
                                     <td className="border px-4 py-2">
-                                        <img src={item.person.photoUrl || "https://via.placeholder.com/100"} alt="Profile Picture" className="rounded-full" style={{ height: "100px", width:"100px" }} />
+                                        <img src={item.person.photoUrl || "https://via.placeholder.com/100"} alt="Profile Picture" className="rounded-full" style={{ height: "100px", width: "100px" }} />
                                     </td>
                                     <td className="border px-4 py-2">{item.person.firstName + " " + item.person.lastName}</td>
                                     <td className="border px-4 py-2">{item.person.headline}</td>
