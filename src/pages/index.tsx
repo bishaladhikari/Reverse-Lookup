@@ -16,7 +16,7 @@ const App = () => {
     const [results, setResults] = useState<any[]>([]);
     const [isGridView, setIsGridView] = useState(true);
     const [theme, setTheme] = useState("light");
-    const fileInput = useRef<HTMLInputElement>(null);
+    const fileInput = useRef<HTMLInputElement>(null);    
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const selectedFile = event.target.files?.[0];
@@ -43,19 +43,22 @@ const App = () => {
 
         axios
             .post("/api/process", formData, {
-                onUploadProgress: (progressEvent) => {
-                    const percentCompleted = Math.round((progressEvent.loaded * 100) / (progressEvent.total ?? 0));
-                    setProgress(percentCompleted);
-                },
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+            onUploadProgress: (progressEvent) => {
+                const percentCompleted = Math.round((progressEvent.loaded * 100) / (progressEvent.total ?? 0));
+                setProgress(percentCompleted);
+            },
             })
             .then((response) => response.data)
             .then((data) => {
-                setResults(data.data);
-                setProgress(0);
+            setResults(data.data);
+            setProgress(0);
             })
             .catch(() => {
-                alert("An error occurred during file upload.");
-                setProgress(0);
+            alert("An error occurred during file upload.");
+            setProgress(0);
             });
     };
 
