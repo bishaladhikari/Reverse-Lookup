@@ -26,7 +26,7 @@ const form = new IncomingForm({ keepExtensions: true });
       return;
     }
 
-    const apikey = fields.apikey[0] as string;
+    const apikey = fields.apikey && fields.apikey[0] as string;
     console.log(apikey) 
 
     if (!apikey || !files.file) {
@@ -40,26 +40,25 @@ const form = new IncomingForm({ keepExtensions: true });
       const fileData = fs.readFileSync(file.filepath);
       const parsedData = xlsx.parse(fileData);
       const sheet = parsedData[0]; // Assuming the data is in the first sheet
-      let data = [];
 
       // Skip the header row and start processing from the second row
-      for (let i = 1; i < sheet.data.length; i++) {
-        const row = sheet.data[i];
-        const email = row[0]; // Assuming email is in the first column
+        for (let i = 1; i < sheet.data.length; i++) {
+          const row = sheet.data[i];
+          const email = row[0]; // Assuming email is in the first column
 
-        console.log('Processing email:', email)
-        console.log(apikey)
-        // Now, send this email to the external API for enrichment
-        // const response = await axios.get('https://api.reversecontact.com/enrichment', {
-        //   params: { email, apikey },
-        // });
+          console.log('Processing email:', email)
+          console.log(apikey)
+          // Now, send this email to the external API for enrichment
+          // const response = await axios.get('https://api.reversecontact.com/enrichment', {
+          //   params: { email, apikey },
+          // });
 
-        // Push the response or the required data into the processedData array
-        // data.push(response.data);
-      }
+          // Push the response or the required data into the processedData array
+          // data.push(response.data);
+        }
 
-    //   res.status(200).json({ data });
-    data = {
+      //   res.status(200).json({ data });
+      const data: { data: any[] } = {
         "data": [
           {
             "success": true,
@@ -361,7 +360,7 @@ const form = new IncomingForm({ keepExtensions: true });
             "rate_limit_left": 10
           }
         ]
-      }
+      };
       res.status(200).json(data);
     } catch (error) {
       console.error('Error processing the file:', error);
